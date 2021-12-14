@@ -1,0 +1,33 @@
+[
+    {
+        "key": "ApiKey",
+        "type": "input",
+        "defaultValue": "",
+        "templateOptions": {
+            "type": "password",
+            "label": "ApiKey",
+            "description": "The ApiKey to connector to Caci Osiris. ApiKeys are generated within the application.",
+            "required": true
+        }
+    },
+    {
+        "key": "BaseUrl",
+        "type": "input",
+        "defaultValue": "",
+        "templateOptions": {
+            "label": "BaseUrl",
+            "description": "The URL to Caci Osiris.",
+            "required": true
+        }
+    },
+    {
+        "key": "Limit",
+        "type": "input",
+        "defaultValue": "",
+        "templateOptions": {
+            "label": "Limit",
+            "description": "The rate limit used to fetch the data",
+            "required": true
+        }
+    }
+]
