@@ -1,9 +1,11 @@
 # HelloID-Conn-Prov-Source-Caci-Osiris
 
-> :warning: This connector has not been tested on a HelloID environment.
+> :warning: This connector has not been tested on a HelloID environment.<br />
+> :warning: Since there is an import time limit of 60 minutes (of all imports combined) for HelloID provisioning. We expect import issues using large data sets from Oriris.
+<br />
 
 <p align="center">
-  <img src="https://www.caci.nl/wp-content/themes/caci-bootscore-child/img/logo/logo.svg">
+  <img src="https://www.caci.nl/wp-content/themes/caci-bootscore-child/img/logo/logo.svg" width="400">
 </p>
 
 ## Table of contents
