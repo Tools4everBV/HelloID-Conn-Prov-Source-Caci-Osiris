@@ -1,5 +1,9 @@
 # HelloID-Conn-Prov-Source-Caci-Osiris
 
+| :information_source: Information |
+|:---------------------------|
+| This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
+
 > :warning: This connector has not been tested on a HelloID environment.<br />
 > :warning: Since there is an import time limit of 60 minutes (of all imports combined) for HelloID provisioning. We expect import issues using large data sets from Oriris.
 <br />
