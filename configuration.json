@@ -1,5 +1,15 @@
 [
     {
+        "key": "BaseUrl",
+        "type": "input",
+        "defaultValue": "",
+        "templateOptions": {
+            "label": "BaseUrl",
+            "description": "The URL to Caci Osiris.",
+            "required": true
+        }
+    },
+    {
         "key": "ApiKey",
         "type": "input",
         "defaultValue": "",
@@ -11,12 +21,12 @@
         }
     },
     {
-        "key": "BaseUrl",
+        "key": "SchoolName",
         "type": "input",
         "defaultValue": "",
         "templateOptions": {
-            "label": "BaseUrl",
-            "description": "The URL to Caci Osiris.",
+            "label": "SchoolName",
+            "description": "The name of the school for which the data will be fetched",
             "required": true
         }
     },
@@ -26,8 +36,30 @@
         "defaultValue": "",
         "templateOptions": {
             "label": "Limit",
-            "description": "The rate limit used to fetch the data",
+            "description": "The limit of students that will be fetched from Caci Osiris and imported in HelloID",
+            "placeholder": "100",
             "required": true
+        }
+    },
+    {
+        "key": "BatchSize",
+        "type": "input",
+        "defaultValue": "40",
+        "templateOptions": {
+            "label": "BatchSize",
+            "description": "The rate limit used to fetch the data. Set this to a max value of 50",
+            "placeholder": "40",
+            "required": true
+        }
+    },
+    {
+        "key": "IsDebug",
+        "type": "checkbox",
+        "defaultValue": true,
+        "templateOptions": {
+            "label": "Toggle debug logging",
+            "description": "When toggled, debug logging will be displayed",
+            "required": false
         }
     }
 ]
