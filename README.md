@@ -4,8 +4,8 @@
 |:---------------------------|
 | This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
 
+> :warning: This connector can only be used in conjunction with the HelloID provisioning agent.<br />
 > :warning: This connector has not been tested on a HelloID environment.<br />
-> :warning: Since there is an import time limit of 60 minutes (of all imports combined) for HelloID provisioning. We expect import issues using large data sets from Oriris.
 <br />
 
 <p align="center">
@@ -29,8 +29,8 @@ _HelloID-Conn-Prov-Source-Caci-Osiris_ is a _source_ connector. Caci-Osiris prov
 
 | Endpoint     | Description |
 | ------------ | ----------- |
-| /basis/studenten | Used to retrieve the students |
-| /generiek/student/opleiding | Used to retrieve the student education information |
+| /basis/student | Used to retrieve the students |
+| /generiek/student | Used to retrieve the student education information |
 
 ## Getting started
 
@@ -40,17 +40,58 @@ The following settings are required to connect to the API.
 
 | Setting      | Description                        | Mandatory   |
 | ------------ | -----------                        | ----------- |
+| BaseUrl    |The URL to Caci Osiris. | Yes |
 | ApiKey     | The ApiKey to connector to Caci Osiris. ApiKeys are generated within the application. | Yes |
-| BaseUrl     |The URL to Caci Osiris. | Yes |
-| Limit      | The rate limit used to fetch the data. | Yes |
+| SchoolName | The name of the school for which the data will be fetched | Yes |
+| Limit      | The limit of students that will be fetched from Caci Osiris and imported in HelloID | Yes |
+| BatchSize  | The rate limit used to fetch the data. Set this to a max value of 50. The default value is set to '40' | No |
+| Isdebug    | When toggled, debug logging will be displayed | No |
 
 ### Prerequisites
 
+- [ ] HelloID Provisioning agent.
+- [ ] Windows PowerShell 5.1 installed on the server where the HelloID agent is installed.
+
 ### Remarks
+
+#### HelloID Agent
+
+For this connector to work properly, you will need to use connector in conjunction with the HelloID provisioning agent. This connector will not work properly when executed using the cloud. 
 
 #### Not tested
 
 This connector has not been tested on a HelloID environment. Changes might have to be made to the code according to your needs.
+
+#### Rate limiting
+
+The API is rate limited to a max of 50 requests per second. Therefore; 
+
+1. First we retrieve all students and store them in the `$responseStudents` object.
+
+```powershell
+  $responseStudents = Invoke-RestMethod @splatParam
+```
+
+2. Then; we break down the students received in the and separate them into smaller batches. The size of a individual batch can be specified in the configuration. (Default value is set to 40) but must not exceed the limit of 50. 
+
+```powershell
+  $batches = ConvertTo-Batches -InputArray $responseStudents.items -BatchSize $($config.batchSize)
+```
+
+3. For each individual batch we will fetch the `richStudentData` from Caci Osiris with a 1 second interval between each batch.
+
+```powershell
+  foreach ($item in $batches[$i]) {
+    $splatGetRichStudentParams = @{
+        Uri     = "$($config.BaseUrl)/basis/student?p_studentnummer=$($item.studentnummer)"
+        Headers = $headers
+        Method  = 'GET'
+    }
+    $richStudentObj = Invoke-RestMethod @splatGetRichStudentParams -Verbose:$false
+    ...
+    Start-Sleep -Seconds 1
+  }
+```
 
 #### No mapping
 
