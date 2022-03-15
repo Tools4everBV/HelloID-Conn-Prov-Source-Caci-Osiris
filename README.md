@@ -56,7 +56,9 @@ The following settings are required to connect to the API.
 
 #### HelloID Agent
 
-For this connector to work properly, you will need to use connector in conjunction with the HelloID provisioning agent. This connector will not work properly when executed using the cloud. 
+For this connector to work properly, you will need to use this connector in conjunction with the HelloID provisioning agent. 
+
+> This connector will not work properly when executed using the cloud. 
 
 #### Not tested
 
@@ -72,13 +74,13 @@ The API is rate limited to a max of 50 requests per second. Therefore;
   $responseStudents = Invoke-RestMethod @splatParam
 ```
 
-2. Then; we break down the students received in the and separate them into smaller batches. The size of a individual batch can be specified in the configuration. (Default value is set to 40) but must not exceed the limit of 50. 
+2. Then; we break down the students received in the `$responseStudents` object and separate them into smaller batches. The size of each individual batch can be specified in the configuration (The default value is set to 40) but must not exceed the limit of 50. 
 
 ```powershell
   $batches = ConvertTo-Batches -InputArray $responseStudents.items -BatchSize $($config.batchSize)
 ```
 
-3. For each individual batch we will fetch the `richStudentData` from Caci Osiris with a 1 second interval between each batch.
+3. For each individual batch we will fetch the `richStudentData` data from Caci Osiris with a 1 second interval between each batch.
 
 ```powershell
   foreach ($item in $batches[$i]) {
