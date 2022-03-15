@@ -66,7 +66,14 @@ This connector has not been tested on a HelloID environment. Changes might have 
 
 #### Rate limiting
 
-The API is rate limited to a max of 50 requests per second. Therefore; 
+Currently the _HelloID-Conn-Prov-Source-Caci-Osiris_ connector works as follows:
+
+1. First retrieve all students from Caci Osiris using a `GET /studenten`.
+2. For each student; we have to do a `GET /studenten/studentNummer` to get a 'so called' `richStudent` object containing information about the educations.
+
+So, if an organization has a large number of students, a lot of API calls will have to be made. 
+
+The Caci Osiris API is rate limited to a max of 50 requests per second. Therefore; 
 
 1. First we retrieve all students and store them in the `$responseStudents` object.
 
