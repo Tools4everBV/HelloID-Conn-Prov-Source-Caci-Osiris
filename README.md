@@ -7,9 +7,8 @@
 > :warning: This connector can only be used in conjunction with the local HelloID provisioning agent.<br />
 > :warning: This connector has not been tested on a HelloID environment.<br />
 <br />
-
 <p align="center">
-  <img src="https://www.caci.nl/wp-content/themes/caci-bootscore-child/img/logo/logo.svg" width="400">
+  <img src="https://www.tools4ever.nl/connector-logos/osiris-logo.png">
 </p>
 
 ## Table of contents
