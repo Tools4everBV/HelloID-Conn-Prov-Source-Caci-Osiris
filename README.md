@@ -4,8 +4,6 @@
 |:---------------------------|
 | This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
 
-> :warning: This connector can only be used in conjunction with the local HelloID provisioning agent.<br />
-> :warning: This connector has not been tested on a HelloID environment.<br />
 <br />
 <p align="center">
   <img src="https://www.tools4ever.nl/connector-logos/osiris-logo.png">
@@ -30,6 +28,15 @@ _HelloID-Conn-Prov-Source-Caci-Osiris_ is a _source_ connector. Caci-Osiris prov
 | ------------ | ----------- |
 | /basis/student | Used to retrieve the students |
 | /generiek/student | Used to retrieve the student education information |
+| /generiek/student/zoek/ | Used to retrieve the student education information |
+
+When classes and groups needs to be included the additional API endpoint are necessary
+
+| Endpoint     | Description |
+| ------------ | ----------- |
+| /generiek/studentgroep | Used to retrieve the groups / classed education information |
+| /generiek/studentgroep/student | Used to retrieve the student from groups / classed education information |
+
 
 ## Getting started
 
@@ -43,25 +50,15 @@ The following settings are required to connect to the API.
 | ApiKey     | The ApiKey to connector to Caci Osiris. ApiKeys are generated within the application. | Yes |
 | SchoolName | The name of the school for which the data will be fetched | Yes |
 | Limit      | The limit of students that will be fetched from Caci Osiris and imported in HelloID | Yes |
-| BatchSize  | The rate limit used to fetch the data. Set this to a max value of 50. The default value is set to '40' | No |
 | Isdebug    | When toggled, debug logging will be displayed | No |
 
 ### Prerequisites
 
-- [ ] HelloID Provisioning agent.
-- [ ] Windows PowerShell 5.1 installed on the server where the HelloID agent is installed.
+- [ ] Enable the webservices
 
 ### Remarks
 
-#### HelloID Agent
 
-For this connector to work properly, you will need to use this connector in conjunction with the HelloID provisioning agent. 
-
-> This connector will not work properly when executed using the cloud. 
-
-#### Not tested
-
-This connector has not been tested on a HelloID environment. Changes might have to be made to the code according to your needs.
 
 #### Rate limiting
 
@@ -80,30 +77,20 @@ The Caci Osiris API is rate limited to a max of 50 requests per second. Therefor
   $responseStudents = Invoke-RestMethod @splatParam
 ```
 
-2. Then; we break down the students received in the `$responseStudents` object and separate them into smaller batches. The size of each individual batch can be specified in the configuration (The default value is set to 40) but must not exceed the limit of 50. 
+2. For each individual student we will fetch the `richStudentData` data from Caci Osiris with a 1 second interval between each batch.
 
 ```powershell
-  $batches = ConvertTo-Batches -InputArray $responseStudents.items -BatchSize $($config.batchSize)
-```
-
-3. For each individual batch we will fetch the `richStudentData` data from Caci Osiris with a 1 second interval between each batch.
-
-```powershell
-  foreach ($item in $batches[$i]) {
-    $splatGetRichStudentParams = @{
-        Uri     = "$($config.BaseUrl)/basis/student?p_studentnummer=$($item.studentnummer)"
+  $persons | ForEach-Object {
+    $splatGetAdditionalStudentdataParams = @{
+        Uri     = "$($config.BaseUrl)/basis/student?p_studentnummer=$($_.studentnummer)"
         Headers = $headers
         Method  = 'GET'
     }
-    $richStudentObj = Invoke-RestMethod @splatGetRichStudentParams -Verbose:$false
+    $responseAdditionalStudentdata = Invoke-RestMethod @splatGetRichStudentParams -Verbose:$false
     ...
-    Start-Sleep -Seconds 1
+    Start-Sleep -Seconds 20
   }
 ```
-
-#### No mapping
-
-Since this connector has not been tested on a HelloID environment, a student mapping is not provided. 
 
 ## Setup the connector
 
