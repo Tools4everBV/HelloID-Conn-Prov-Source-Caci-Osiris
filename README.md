@@ -1,5 +1,9 @@
 # HelloID-Conn-Prov-Source-Caci-Osiris
 
+> [!CAUTION]
+> The customer must manually select the relevant data fields in Osiris. By default, all data is available, including BSN and other fields that we do not want to include in HelloID.
+Make sure to clearly communicate this to the customer, and always perform a preview of the data first to check if any unexpected fields are included.
+
 | :information_source: Information |
 |:---------------------------|
 | This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
