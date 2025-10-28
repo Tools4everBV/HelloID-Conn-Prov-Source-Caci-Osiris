@@ -21,12 +21,12 @@
     }
   },
   {
-    "key": "SchoolName",
+    "key": "StudentSelection",
     "type": "input",
     "defaultValue": "",
     "templateOptions": {
-      "label": "SchoolName",
-      "description": "The name of the school for which the data will be fetched",
+      "label": "Student Selection",
+      "description": "The name of the selection for which the data will be fetched",
       "required": true
     }
   },
