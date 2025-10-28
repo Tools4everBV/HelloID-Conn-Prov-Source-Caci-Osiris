@@ -1,94 +1,158 @@
 {
-    "personMappings": [
-        {
-            "name": "ExternalId",
-            "mode": "field",
-            "value": "ExternalId",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "Name.Convention",
-            "mode": "field",
-            "value": "Convention",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "Name.FamilyName",
-            "mode": "field",
-            "value": "RichStudent.achternaam",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "name": "Name.NickName",
-            "mode": "field",
-            "value": "RichStudent.roepnaam",
-            "validation": {
-                "required": true
-            }
-        }
-    ],
-    "contractMappings": [
-        {
-            "name": "Department.DisplayName",
-            "mode": "field",
-            "value": "DepartmentName",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "Department.ExternalId",
-            "mode": "field",
-            "value": "DepartmentCode",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "EndDate",
-            "mode": "field",
-            "value": "EndDate",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "ExternalId",
-            "mode": "field",
-            "value": "ExternalId",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "StartDate",
-            "mode": "field",
-            "value": "StartDate",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "Title.ExternalId",
-            "mode": "field",
-            "value": "TitleCode",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "name": "Title.Name",
-            "mode": "field",
-            "value": "TitleName",
-            "validation": {
-                "required": false
-            }
-        }
-    ]
+	"personMappings": [
+		{
+			"name": "Contact.Personal.Email",
+			"mode": "field",
+			"value": "e_mail_adres_aanmelding",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Contact.Personal.Phone.Mobile",
+			"mode": "field",
+			"value": "mobiel_telefoonnummer",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.Gender",
+			"mode": "field",
+			"value": "geslacht",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "ExternalId",
+			"mode": "field",
+			"value": "ExternalId",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.Convention",
+			"mode": "fixed",
+			"value": "B",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyName",
+			"mode": "field",
+			"value": "achternaam",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.FamilyNamePartner",
+			"mode": "field",
+			"value": "achternaam_partner",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyNamePartnerPrefix",
+			"mode": "field",
+			"value": "voorvoegsels_partner",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyNamePrefix",
+			"mode": "field",
+			"value": "voorvoegsels",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.GivenName",
+			"mode": "field",
+			"value": "voornamen",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.Initials",
+			"mode": "field",
+			"value": "voorletters",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.NickName",
+			"mode": "field",
+			"value": "roepnaam",
+			"validation": {
+				"required": true
+			}
+		}
+	],
+	"contractMappings": [
+		{
+			"name": "Department.DisplayName",
+			"mode": "field",
+			"value": "opleiding_naam",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Department.ExternalId",
+			"mode": "field",
+			"value": "opleiding",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "EndDate",
+			"mode": "field",
+			"value": "afloopdatum",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "ExternalId",
+			"mode": "field",
+			"value": "ExternalId",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "StartDate",
+			"mode": "field",
+			"value": "ingangsdatum",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Type.Code",
+			"mode": "field",
+			"value": "examentype_csa",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Type.Description",
+			"mode": "field",
+			"value": "examentype_csa",
+			"validation": {
+				"required": false
+			}
+		}
+	]
 }
