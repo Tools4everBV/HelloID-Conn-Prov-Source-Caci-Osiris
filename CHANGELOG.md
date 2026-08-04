@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com), and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [1.1.2] - 04-08-2026
+
+### Fixed
+
+- Issue [#3](https://github.com/Tools4everBV/HelloID-Conn-Prov-Source-Caci-Osiris/issues/3)
+
+## [1.1.1] - 23-10-2025
+
+- Hotfix, added `CAUTION` in README
+
 ## [1.1.0] - 03-08-2023
 
 - Changed foreach(){} to ForEach-Object {}
