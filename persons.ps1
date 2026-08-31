@@ -56,6 +56,9 @@ try {
     $persons | ForEach-Object {
         $person_ExternalId = $_.studentnummer
         # Query additional data for specific student
+        $maxRetries = 3
+        $retryCount = 0
+        $success = $false
         while (-not $success -and $retryCount -lt $maxRetries) {
             try {
                 # Attempt the operation
