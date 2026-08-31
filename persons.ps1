@@ -56,16 +56,28 @@ try {
     $persons | ForEach-Object {
         $person_ExternalId = $_.studentnummer
         # Query additional data for specific student
-        try {
-            $splatGetAdditionalStudentdataParams = @{
-                Uri     = "$($c.BaseUrl)/basis/student?p_studentnummer=$($_.studentnummer)"
-                Headers = $headers
-                Method  = 'GET'
+        $maxRetries = 3
+        $retryCount = 0
+        $success = $false
+        while (-not $success -and $retryCount -lt $maxRetries) {
+            try {
+                # Attempt the operation
+                $splatGetAdditionalStudentdataParams = @{
+                    Uri     = "$($c.BaseUrl)/basis/student?p_studentnummer=$($_.studentnummer)"
+                    Headers = $headers
+                    Method  = 'GET'
+                }
+                $responseAdditionalStudentdata = Invoke-RestMethod @splatGetAdditionalStudentdataParams -Verbose:$false
+                $success = $true
             }
-            $responseAdditionalStudentdata = Invoke-RestMethod @splatGetAdditionalStudentdataParams -Verbose:$false
+            catch {
+                $retryCount++
+                Write-Warning "Retrying student: $($person_ExternalId)... ($retryCount/$maxRetries)"
+            }
         }
-        catch {
-            throw "Could not query additional data for student: $($person_ExternalId). Error: $($_.Exception.Message)"
+
+        if (-not $success) {
+            throw "Could not query additional data for student: $($person_ExternalId) after $($retryCount) attempts. Error: $($_.Exception.Message)"
         }
 
         $person = $responseAdditionalStudentdata

@@ -4,9 +4,8 @@
 > The customer must manually select the relevant data fields in Osiris. By default, all data is available, including BSN and other fields that we do not want to include in HelloID.
 Make sure to clearly communicate this to the customer, and always perform a preview of the data first to check if any unexpected fields are included.
 
-| :information_source: Information |
-|:---------------------------|
-| This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.       |
+> [!IMPORTANT]
+> This repository contains the connector and configuration code only. The implementer is responsible to acquire the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements.
 
 <br />
 <p align="center">
@@ -15,30 +14,33 @@ Make sure to clearly communicate this to the customer, and always perform a prev
 
 ## Table of contents
 
-- [Introduction](#Introduction)
-- [Getting started](#Getting-started)
-  + [Connection settings](#Connection-settings)
-  + [Prerequisites](#Prerequisites)
-  + [Remarks](#Remarks)
-- [Setup the connector](@Setup-The-Connector)
-- [Getting help](#Getting-help)
-- [HelloID Docs](#HelloID-docs)
+- [HelloID-Conn-Prov-Source-Caci-Osiris](#helloid-conn-prov-source-caci-osiris)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Getting started](#getting-started)
+    - [Connection settings](#connection-settings)
+    - [Prerequisites](#prerequisites)
+    - [Remarks](#remarks)
+      - [Rate limiting](#rate-limiting)
+  - [Setup the connector](#setup-the-connector)
+  - [Getting help](#getting-help)
+  - [HelloID docs](#helloid-docs)
 
 ## Introduction
 
 _HelloID-Conn-Prov-Source-Caci-Osiris_ is a _source_ connector. Caci-Osiris provides a set of REST API's that allow you to programmatically interact with it's data. The HelloID connector uses the API endpoints listed in the table below.
 
-| Endpoint     | Description |
-| ------------ | ----------- |
-| /basis/student | Used to retrieve the students |
-| /generiek/student | Used to retrieve the student education information |
+| Endpoint                | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| /basis/student          | Used to retrieve the students                      |
+| /generiek/student       | Used to retrieve the student education information |
 | /generiek/student/zoek/ | Used to retrieve the student education information |
 
 When classes and groups needs to be included the additional API endpoint are necessary
 
-| Endpoint     | Description |
-| ------------ | ----------- |
-| /generiek/studentgroep | Used to retrieve the groups / classed education information |
+| Endpoint                       | Description                                                              |
+| ------------------------------ | ------------------------------------------------------------------------ |
+| /generiek/studentgroep         | Used to retrieve the groups / classed education information              |
 | /generiek/studentgroep/student | Used to retrieve the student from groups / classed education information |
 
 
@@ -48,13 +50,13 @@ When classes and groups needs to be included the additional API endpoint are nec
 
 The following settings are required to connect to the API.
 
-| Setting      | Description                        | Mandatory   |
-| ------------ | -----------                        | ----------- |
-| BaseUrl    |The URL to Caci Osiris. | Yes |
-| ApiKey     | The ApiKey to connector to Caci Osiris. ApiKeys are generated within the application. | Yes |
-| SchoolName | The name of the school for which the data will be fetched | Yes |
-| Limit      | The limit of students that will be fetched from Caci Osiris and imported in HelloID | Yes |
-| Isdebug    | When toggled, debug logging will be displayed | No |
+| Setting    | Description                                                                           | Mandatory |
+| ---------- | ------------------------------------------------------------------------------------- | --------- |
+| BaseUrl    | The URL to Caci Osiris.                                                               | Yes       |
+| ApiKey     | The ApiKey to connector to Caci Osiris. ApiKeys are generated within the application. | Yes       |
+| SchoolName | The name of the school for which the data will be fetched                             | Yes       |
+| Limit      | The limit of students that will be fetched from Caci Osiris and imported in HelloID   | Yes       |
+| Isdebug    | When toggled, debug logging will be displayed                                         | No        |
 
 ### Prerequisites
 
@@ -100,9 +102,8 @@ The Caci Osiris API is rate limited to a max of 50 requests per second. Therefor
 
 ## Getting help
 
-> _For more information on how to configure a HelloID PowerShell connector, please refer to our [documentation](https://docs.helloid.com/hc/en-us/articles/360012557600-Configure-a-custom-PowerShell-source-system) pages_
-
-> _If you need help, feel free to ask questions on our [forum](https://forum.helloid.com)_
+> [!TIP]
+> _For more information on how to configure a HelloID PowerShell connector, please refer to our [documentation](https://docs.helloid.com/en/provisioning/Source-systems/powershell-v2-Source-systems.html) pages_.
 
 ## HelloID docs
 
